@@ -1,15 +1,17 @@
-import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { Base } from './Base.entity';
-import { Permission } from './Permission.entity';
+import { UserEntity } from './User.entity';
 
-@Entity('role')
-export class Role extends Base {
+@Entity('roles')
+export class RoleEntity extends Base {
   @Column()
   name: string;
-
-  @ManyToMany(() => Permission)
-  @JoinTable({
-    name: 'role_permission_relation',
-  })
-  permissions: Permission[];
 }

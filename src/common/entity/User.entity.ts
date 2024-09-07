@@ -1,8 +1,16 @@
-import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 import { Base } from './Base.entity';
-import { Role } from './Role.entity';
+import { RoleEntity } from './Role.entity';
 
-@Entity('user')
+@Entity('users')
 export class UserEntity extends Base {
   @Column()
   username: string;
@@ -10,9 +18,6 @@ export class UserEntity extends Base {
   @Column()
   password: string;
 
-  @ManyToMany(() => Role)
-  @JoinTable({
-    name: 'user_role_relation',
-  })
-  roles: Role[];
+  @ManyToOne(() => RoleEntity, (users) => users.id)
+  role: RoleEntity[];
 }
